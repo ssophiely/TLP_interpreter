@@ -1,3 +1,6 @@
+from Tree.NodeListener import *
+
+
 class Tree:
     def __init__(self, term, value):
         self.term = term
@@ -14,11 +17,20 @@ class Tree:
         if self is None:
             return
 
-        if self.term == True:
-            self.parent.children += [Tree(False, "доп", self.parent)]
+        if self.term:
+            self.parent.add_children([Tree(False, "доп")])
 
         for node in self.children:
-            if node == None:
+            if node is None:
                 return
             node.print_tree()
             print(node.value)
+
+    def print_root_left_right(self):
+        if self is None:
+            return
+
+        print(self.value)
+        current_node(self)
+        for child in self.children:
+            child.print_root_left_right()

@@ -1,7 +1,5 @@
 import re
 
-from Tree.Tree import Tree
-
 pat = re.compile(r"([:;+=/\-,()])")
 
 # Разбиение входного файла на лексемы
@@ -12,7 +10,13 @@ with open("Program.txt") as file:
 
 print(tokens)
 
-main = Tree(False, "main", None)
-t1 = Tree(True, "t1", main)
-main.children += [t1]
-main.print_tree()
+# main = Tree(False, "main")
+# t1 = Tree(True, "t1")
+# main.add_children([t1])
+# main.print_tree()
+
+# Main = BuildMainTree()
+# Main.print_root_left_right()
+l = [1, 2, 3]
+l = l[1:]
+print(l)

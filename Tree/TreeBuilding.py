@@ -1,4 +1,4 @@
-import Tree
+from Tree.Tree import Tree
 
 lineBreak = Tree(True, ';')
 colon = Tree(True, ':')
