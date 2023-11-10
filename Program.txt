@@ -1,0 +1,12 @@
+var x : integer; begin
+    x = -1;
+    y = 2;
+    r = 5;
+    write(x);
+    read(y);
+    write(y);
+    case x of
+        1: write(y, x);
+        2: write(x);
+    end_case;
+end
