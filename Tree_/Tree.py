@@ -1,4 +1,4 @@
-from Tree.NodeListener import *
+from Tree_.NodeListener import current_node
 
 
 class Tree:
@@ -26,11 +26,11 @@ class Tree:
             node.print_tree()
             print(node.value)
 
-    def print_root_left_right(self):
+    def check_root_left_right(self):
         if self is None:
             return
 
         print(self.value)
         current_node(self)
         for child in self.children:
-            child.print_root_left_right()
+            child.check_root_left_right()
