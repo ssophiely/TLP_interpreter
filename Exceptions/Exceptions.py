@@ -29,3 +29,10 @@ class SintaxError(Exception):
 
     def __str__(self):
         return 'Синтаксичсекая ошибка: {0}.'.format(self.var)
+
+
+class EndError(Exception):
+    def __init__(self): pass
+
+    def __str__(self):
+        return 'Недопустимые символы после end.'

@@ -1,6 +1,5 @@
 from Tree_.Tree import Tree
 
-lineBreak = Tree(True, ';')
 colon = Tree(True, ':')
 l_bracket = Tree(True, '(')
 r_bracket = Tree(True, ')')
@@ -17,6 +16,7 @@ def build_main_tree():
     var = Tree(True, "var")
     type = Tree(True, 'integer')
     lPer = Tree(False, "LPer")
+    lineBreak = Tree(True, ';')
     obPer.add_children([var, lPer, colon, type, lineBreak])
 
     opVych = Tree(False, "OpVych")
@@ -35,6 +35,7 @@ def build_in_tree():
     _read = Tree(True, "read")
     _in = Tree(False, "In")
     lPer = Tree(False, "LPer")
+    lineBreak = Tree(True, ';')
     _in.add_children([_read, l_bracket, lPer, r_bracket, lineBreak])
     return _in
 
@@ -43,6 +44,7 @@ def build_out_tree():
     _write = Tree(True, "write")
     _out = Tree(False, "Out")
     lPer = Tree(False, "LPer")
+    lineBreak = Tree(True, ';')
     _out.add_children([_write, l_bracket, lPer, r_bracket, lineBreak])
     return _out
 
@@ -56,13 +58,15 @@ def build_cond_tree():
 
     _end_case = Tree(True, "end_case")
     cond = Tree(False, "Cond")
-    cond.add_children([_case, id, _of, lVyb, _end_case])
+    lineBreak = Tree(True, ';')
+    cond.add_children([_case, id, _of, lVyb, _end_case, lineBreak])
     return cond
 
 
 def build_init_tree():
     init = Tree(False, "Init")
     vyr = Tree(False, "Vyr")
+    lineBreak = Tree(True, ';')
     init.add_children([id, assign, vyr, lineBreak])
     return init
 

@@ -1,4 +1,4 @@
-from Tree_.NodeListener import current_node
+from Verification.EnteringFuncs import *
 
 
 class Tree:
@@ -13,24 +13,53 @@ class Tree:
         for child in list:
             child.parent = self
 
-    def print_tree(self):
-        if self is None:
-            return
-
-        if self.term:
-            self.parent.add_children([Tree(False, "доп")])
-
-        for node in self.children:
-            if node is None:
-                return
-            node.print_tree()
-            print(node.value)
-
     def check_root_left_right(self):
         if self is None:
             return
 
-        print(self.value)
-        current_node(self)
+        # print(self.value)
+        self.current_node()
         for child in self.children:
             child.check_root_left_right()
+
+    def current_node(self):
+        t = globals.TOKENS[0]
+
+        if self.term:
+            enter_Term(self)
+
+        elif self.value == "LPer":
+            enter_LPer()
+
+        elif self.value == "Pris":
+            enter_Pris(self)
+
+        elif self.value == "Id":
+            id_check(t)
+            l_trim()
+            return
+
+        elif self.value == "Vyr":
+            enter_Vyr(self)
+
+        elif self.value == "UnOp":
+            l_trim()
+            return
+
+        elif self.value == "BinOp":
+            l_trim()
+            return
+
+        elif self.value == "Number":
+            number_check(t)
+            l_trim()
+            return
+
+        elif self.value == "PVyr":
+            enter_PVyr(self)
+
+        elif self.value == "PVyr1":
+            enter_PVyr1(self)
+
+        else:
+            return
