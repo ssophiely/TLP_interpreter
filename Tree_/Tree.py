@@ -35,7 +35,7 @@ class Tree:
             enter_Pris(self)
 
         elif self.value == "Id":
-            id_check(t)
+            id_check(t[0], t[1])
             l_trim()
             return
 
@@ -51,7 +51,7 @@ class Tree:
             return
 
         elif self.value == "Number":
-            number_check(t)
+            number_check(t[0], t[1])
             l_trim()
             return
 
