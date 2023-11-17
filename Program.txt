@@ -8,6 +8,7 @@ var x : integer; begin
     case x of
         1: write(y, x);
         2: write(x);
+        3: case
     end_case;
     abc=(78+87/7);
 end

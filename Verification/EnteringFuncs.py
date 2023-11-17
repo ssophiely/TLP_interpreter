@@ -1,5 +1,5 @@
 import globals
-from Exceptions.Exceptions import SintaxError, EndError
+from Exceptions.Exceptions import *
 from Verification.TermFuncs import *
 
 
@@ -7,13 +7,30 @@ def l_trim():
     globals.TOKENS = globals.TOKENS[1:]
 
 
-def enter_LPer():
+def enter_LPer(node):
     x = globals.TOKENS[0]
     id_check(x[0], x[1])
+
+    if node.parent.value == "ObPer":
+        if x[0] not in globals.VARS:
+            globals.VARS[x[0]] = 0
+        else:
+            raise BeenDefinedError(x[0], x[1])
+
+    if node.parent.value in ["Out", "In"]:
+        if x[0] not in globals.VARS:
+            raise NotDefinedError(x[0], x[1])
+
+        if node.parent.value == "Out":
+            if x[0] not in globals.VARS_INIT:
+                raise NotInitError(x[0], x[1])
+        if node.parent.value == "In":
+            globals.VARS_INIT.add(x[0])
+
     l_trim()
     if globals.TOKENS[0][0] == ',':
         l_trim()
-        enter_LPer()
+        enter_LPer(node)
     return
 
 
@@ -92,7 +109,16 @@ def enter_Term(node):
     if t != node.value:
         raise Error(node.value, t, globals.TOKENS[0][1])
 
+    # Добавления терминала в соответсвующий список для лексического анализа
+    if t in grLexer.KEY_WORDS:
+        grLexer.KEY_WORDS_OUT.add(t)
+    if t in grLexer.SPECIAL_OP:
+        grLexer.SPECIAL_OP_OUT.add(t)
+
     if t == ';' and node.parent.value in ["Init", "In", "Out", "Cond"]:
+        if node.parent.value == "Init":
+            globals.VARS_INIT.add(globals.VARS_INIT.add(globals.INIT))
+
         if node.parent.parent.parent.value == "LPris":
             l_trim()
             enter_Pris(node.parent.parent)

@@ -1,9 +1,7 @@
-var x : integer;
+var x,y,c : integer;
 begin
-    case x of
-        1: write(y, x);
-        3: avc=5-c;
-    end_case;
-    write(y, x);
-    abc=(78+87/7+(-asd-90));
+    c=56+90;
+    y=-67+(78-9);
+    read(x,y);
+    write(x,y,c);
 end

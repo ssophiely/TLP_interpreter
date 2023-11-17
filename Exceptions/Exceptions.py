@@ -46,7 +46,52 @@ class SintaxError(Exception):
 
 class EndError(Exception):
     def __init__(self, *args):
-        self.str = args[1]
+        self.str = args[0]
 
     def __str__(self):
         return 'Недопустимые символы после end. Строка {0}.'.format(self.str)
+
+
+class BeenDefinedError(Exception):
+    def __init__(self, *args):
+        self.var = args[0]
+        self.str = args[1]
+
+    def __str__(self):
+        return 'Переменная {0} уже определена. Строка {1}.'.format(self.var, self.str)
+
+
+class NotDefinedError(Exception):
+    def __init__(self, *args):
+        self.var = args[0]
+        self.str = args[1]
+
+    def __str__(self):
+        return 'Переменная {0} не определена. Строка {1}.'.format(self.var, self.str)
+
+
+class NotInitError(Exception):
+    def __init__(self, *args):
+        self.var = args[0]
+        self.str = args[1]
+
+    def __str__(self):
+        return 'Переменной {0} не присвоено значение. Строка {1}.'.format(self.var, self.str)
+
+
+class CondNumError(Exception):
+    def __init__(self, *args):
+        self.var = args[0]
+        self.str = args[1]
+
+    def __str__(self):
+        return 'Значение {0} должно быть уникальным. Строка {1}.'.format(self.var, self.str)
+
+
+class CondVarError(Exception):
+    def __init__(self, *args):
+        self.var = args[0]
+        self.str = args[1]
+
+    def __str__(self):
+        return 'Во вложенных блоках case...of найдены одинаковые переменные {0}. Строка {1}.'.format(self.var, self.str)
