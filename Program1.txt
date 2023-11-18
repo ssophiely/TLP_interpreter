@@ -1,7 +1,20 @@
 var x,y,c : integer;
 begin
     c=56+90;
-    y=-67+(78-9);
-    read(x,y);
+    y=-(67+(78-9));
+    read(y);
+    x=5;
     write(x,y,c);
+    case x of
+        1: write(y, x);
+        2: c=y-5;
+        3: case x of
+                1: write(x);
+                6: write(x);
+           end_case;
+    end_case;
+    case y of
+        1: write(y, x);
+        2: c=y-5;
+    end_case;
 end

@@ -86,12 +86,3 @@ class CondNumError(Exception):
 
     def __str__(self):
         return 'Значение {0} должно быть уникальным. Строка {1}.'.format(self.var, self.str)
-
-
-class CondVarError(Exception):
-    def __init__(self, *args):
-        self.var = args[0]
-        self.str = args[1]
-
-    def __str__(self):
-        return 'Во вложенных блоках case...of найдены одинаковые переменные {0}. Строка {1}.'.format(self.var, self.str)

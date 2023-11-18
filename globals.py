@@ -8,4 +8,4 @@ VARS_INIT = set()
 INIT = ""
 
 # Словарь для проверки блока case ... of... end_case
-COND = {}
+COND = []

@@ -7,6 +7,16 @@ def l_trim():
     globals.TOKENS = globals.TOKENS[1:]
 
 
+def not_def_error(x, s):
+    if x not in globals.VARS:
+        raise NotDefinedError(x, s)
+
+
+def not_init_error(x, s):
+    if x not in globals.VARS_INIT:
+        raise NotInitError(x, s)
+
+
 def enter_LPer(node):
     x = globals.TOKENS[0]
     id_check(x[0], x[1])
@@ -18,12 +28,10 @@ def enter_LPer(node):
             raise BeenDefinedError(x[0], x[1])
 
     if node.parent.value in ["Out", "In"]:
-        if x[0] not in globals.VARS:
-            raise NotDefinedError(x[0], x[1])
+        not_def_error(x[0], x[1])
 
         if node.parent.value == "Out":
-            if x[0] not in globals.VARS_INIT:
-                raise NotInitError(x[0], x[1])
+            not_init_error(x[0], x[1])
         if node.parent.value == "In":
             globals.VARS_INIT.add(x[0])
 
@@ -117,7 +125,7 @@ def enter_Term(node):
 
     if t == ';' and node.parent.value in ["Init", "In", "Out", "Cond"]:
         if node.parent.value == "Init":
-            globals.VARS_INIT.add(globals.VARS_INIT.add(globals.INIT))
+            globals.VARS_INIT.add(globals.INIT)
 
         if node.parent.parent.parent.value == "LPris":
             l_trim()

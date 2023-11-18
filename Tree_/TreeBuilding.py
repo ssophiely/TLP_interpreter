@@ -60,6 +60,7 @@ def build_cond_tree():
     cond = Tree(False, "Cond")
     lineBreak = Tree(True, ';')
     cond.add_children([_case, id, _of, lVyb, _end_case, lineBreak])
+    cond.nums = []
     return cond
 
 

@@ -20,6 +20,7 @@ class Tree:
             return
 
         self.current_node()
+        
         for child in self.children:
             child.check_root_left_right()
 
@@ -38,23 +39,15 @@ class Tree:
         elif self.value == "Id":
             id_check(t[0], t[1])
 
-            if t[0] not in globals.VARS:
-                raise NotDefinedError(t[0], t[1])
+            # проверка переменной на определение
+            not_def_error(t[0], t[1])
 
             if self.parent.value == "Init":
                 globals.INIT = t[0]
 
-            if self.parent.value == "Cond":
-                if t[0] not in globals.VARS_INIT:
-                    raise NotInitError(t[0], t[1])
-                if t[0] in globals.COND:
-                    raise CondVarError(t[0], t[1])
-                else:
-                    globals.COND[t[0]] = []
-
-            if self.parent.value == "Simple":
-                if t[0] not in globals.VARS_INIT:
-                    raise NotInitError(t[0], t[1])
+            # проверка переменной на инициализацию
+            if self.parent.value == "Cond" or self.parent.value == "Simple":
+                not_init_error(t[0], t[1])
 
             l_trim()
             return
@@ -75,12 +68,12 @@ class Tree:
         elif self.value == "Number":
             number_check(t[0], t[1])
 
-            # if self.parent.value == "Vyb":
-            #     cond_ch = self.parent.parent.parent.children
-            #     if t[0] in globals.COND[cond_ch[1].]:
-            #         globals.COND += [t[0]]
-            #     else:
-            #         raise CondNumError(t[0], t[1])
+            # проверка на уникальность значений в case
+            if self.parent.value == "Vyb":
+                l_nums = self.parent.parent.parent.nums
+                if t[0] in l_nums:
+                    raise CondNumError(t[0], t[1])
+                l_nums += [t[0]]
 
             l_trim()
             return
