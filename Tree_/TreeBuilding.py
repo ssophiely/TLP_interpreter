@@ -3,8 +3,6 @@ from Tree_.Tree import Tree
 colon = Tree(True, ':')
 l_bracket = Tree(True, '(')
 r_bracket = Tree(True, ')')
-id = Tree(False, 'Id')
-number = Tree(False, 'Number')
 assign = Tree(True, '=')
 unOp = Tree(False, "UnOp")
 
@@ -59,6 +57,7 @@ def build_cond_tree():
     _end_case = Tree(True, "end_case")
     cond = Tree(False, "Cond")
     lineBreak = Tree(True, ';')
+    id = Tree(False, 'Id')
     cond.add_children([_case, id, _of, lVyb, _end_case, lineBreak])
     cond.nums = []
     return cond
@@ -68,6 +67,7 @@ def build_init_tree():
     init = Tree(False, "Init")
     vyr = Tree(False, "Vyr")
     lineBreak = Tree(True, ';')
+    id = Tree(False, 'Id')
     init.add_children([id, assign, vyr, lineBreak])
     return init
 
@@ -80,7 +80,7 @@ def build_simple_expr_tree(op):
 
 
 def build_complex_expr_tree():
-    complex = Tree(False, "Init")
+    complex = Tree(False, "Complex")
     vyr = Tree(False, "Vyr")
     pVyr1 = Tree(False, "PVyr1")
     complex.add_children([l_bracket, vyr, r_bracket, pVyr1])
@@ -88,7 +88,7 @@ def build_complex_expr_tree():
 
 
 def build_minus_expr_tree():
-    minExpr = Tree(False, "Init")
+    minExpr = Tree(False, "Minus")
     pVyr = Tree(False, "PVyr")
     minExpr.add_children([unOp, pVyr])
     return minExpr
@@ -97,5 +97,6 @@ def build_minus_expr_tree():
 def build_vyb_tree():
     vyb = Tree(False, "Vyb")
     pris = Tree(False, "Pris")
+    number = Tree(False, 'Number')
     vyb.add_children([number, colon, pris])
     return vyb

@@ -35,6 +35,7 @@ def enter_LPer(node):
         if node.parent.value == "In":
             globals.VARS_INIT.add(x[0])
 
+    node.val += [x[0]]
     l_trim()
     if globals.TOKENS[0][0] == ',':
         l_trim()

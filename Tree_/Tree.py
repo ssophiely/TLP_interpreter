@@ -14,13 +14,22 @@ class Tree:
         for child in list:
             child.parent = self
 
+    def rlr(self):
+        if self is None:
+            return
+
+        print(self.value)
+
+        for child in self.children:
+            child.rlr()
+
     # Синтаксический анализ программы
     def check_root_left_right(self):
         if self is None:
             return
 
         self.current_node()
-        
+
         for child in self.children:
             child.check_root_left_right()
 
@@ -29,8 +38,10 @@ class Tree:
 
         if self.term:
             enter_Term(self)
+            self.val = t[0]
 
         elif self.value == "LPer":
+            self.val = []
             enter_LPer(self)
 
         elif self.value == "Pris":
@@ -49,6 +60,7 @@ class Tree:
             if self.parent.value == "Cond" or self.parent.value == "Simple":
                 not_init_error(t[0], t[1])
 
+            self.val = t[0]
             l_trim()
             return
 
@@ -57,11 +69,13 @@ class Tree:
 
         elif self.value == "UnOp":
             grLexer.UN_OP_OUT.add(t[0])
+            self.val = t[0]
             l_trim()
             return
 
         elif self.value == "BinOp":
             grLexer.BIN_OP_OUT.add(t[0])
+            self.val = t[0]
             l_trim()
             return
 
@@ -75,6 +89,7 @@ class Tree:
                     raise CondNumError(t[0], t[1])
                 l_nums += [t[0]]
 
+            self.val = t[0]
             l_trim()
             return
 
@@ -97,22 +112,17 @@ class Tree:
             child.execute_root_left_right()
 
     def current_node_exe(self):
-        if self.value == "ObPer":
-            vars_init()
-            self.children = []
+        if self.value == "LPer":
+            lPer_exe(self)
             return
 
-        if self.value == "Out":
-            write_exe()
-            self.children = []
-            return
+        if self.value == "Id" and self.parent.value == "Cond":
+            globals.COND = g.VARS[self.val]
 
-        if self.value == "In":
-            read_exe()
-            self.children = []
-            return
+        if self.value == "Number" and self.parent.value == "Vyb":
+            if globals.COND != int(self.val):
+                self.parent.children.clear()
 
-        if self.value == "Init":
-            init_exe()
-            self.children = []
-            return
+        if self.value == "Vyr" and self.parent.value == "Init":
+            init_exe(self)
+            self.children.clear()
