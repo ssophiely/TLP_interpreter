@@ -21,23 +21,19 @@ def lPer_exe(node):
 # Выполнение присваивания значения переменной
 def init_exe(vyr):
     id = vyr.parent.children[0].val
-
     l = []
     create_vyr(vyr, l)
-
-    print(l)
-    g.VARS[id] = calculate(l)
-
-
-def calculate(l): pass
+    g.VARS[id] = eval(''.join(l))
 
 
 def create_vyr(node, l):
     if node is None:
         return
 
-    if node.value in ["UnOp", "BinOp", "Id", "Number"]:
-        l += [node.val]
+    if node.value in ["UnOp", "BinOp", "Number"]:
+        l += [str(node.val)]
+    if node.value == "Id":
+        l += [str(g.VARS[node.val])]
     if node.term:
         l += [node.val]
 

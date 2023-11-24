@@ -3,7 +3,7 @@ begin
     read(x,y,c);
     write(x,y,c);
     case x of
-        3: y=-(67-x/2)+15;
+        3: y=-(y+x+c);
         5: read(c);
         6: case c of
             1: write(x);
