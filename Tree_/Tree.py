@@ -14,26 +14,17 @@ class Tree:
         for child in list:
             child.parent = self
 
-    def rlr(self):
-        if self is None:
-            return
-
-        print(self.value)
-
-        for child in self.children:
-            child.rlr()
-
     # Синтаксический анализ программы
-    def check_root_left_right(self):
+    def parse(self):
         if self is None:
             return
 
-        self.current_node()
+        self.node_check()
 
         for child in self.children:
-            child.check_root_left_right()
+            child.parse()
 
-    def current_node(self):
+    def node_check(self):
         t = globals.TOKENS[0]
 
         if self.term:
@@ -48,6 +39,7 @@ class Tree:
             enter_Pris(self)
 
         elif self.value == "Id":
+            # проверка переменной на имя
             id_check(t[0], t[1])
 
             # проверка переменной на определение
@@ -62,7 +54,6 @@ class Tree:
 
             self.val = t[0]
             l_trim()
-            return
 
         elif self.value == "Vyr":
             enter_Vyr(self)
@@ -71,15 +62,14 @@ class Tree:
             grLexer.UN_OP_OUT.add(t[0])
             self.val = t[0]
             l_trim()
-            return
 
         elif self.value == "BinOp":
             grLexer.BIN_OP_OUT.add(t[0])
             self.val = t[0]
             l_trim()
-            return
 
         elif self.value == "Number":
+            # проверка на целочисленное значение
             number_check(t[0], t[1])
 
             # проверка на уникальность значений в case
@@ -91,7 +81,6 @@ class Tree:
 
             self.val = t[0]
             l_trim()
-            return
 
         elif self.value == "PVyr":
             enter_PVyr(self)
@@ -103,15 +92,15 @@ class Tree:
             return
 
     # Выполнение программы
-    def execute_root_left_right(self):
+    def execute(self):
         if self is None:
             return
 
-        self.current_node_exe()
+        self.node_check_exe()
         for child in self.children:
-            child.execute_root_left_right()
+            child.execute()
 
-    def current_node_exe(self):
+    def node_check_exe(self):
         if self.value == "LPer":
             lPer_exe(self)
             return

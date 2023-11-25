@@ -1,14 +1,14 @@
-var x,y,c : integer;
+var x,y,z : integer;
 begin
-    read(x,y,c);
-    write(x,y,c);
+    read(x,y,z);
+    write(x,y,z);
     case x of
-        3: y=-(y+x+c);
-        5: read(c);
-        6: case c of
+        3: y=-56+20;
+        5: read(z);
+        6: case z of
             1: write(x);
-            2: c=5;
+            2: z=5;
             end_case;
     end_case;
-    write(y);
+    write(x,y,z);
 end

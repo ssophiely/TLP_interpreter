@@ -37,6 +37,7 @@ def enter_LPer(node):
 
     node.val += [x[0]]
     l_trim()
+
     if globals.TOKENS[0][0] == ',':
         l_trim()
         enter_LPer(node)
@@ -45,7 +46,9 @@ def enter_LPer(node):
 
 def enter_Pris(node):
     import Tree_.TreeBuilding as b
+
     x = globals.TOKENS[0][0]
+
     if node.parent.value == "LPris":
         if x == "end":
             return
@@ -68,18 +71,19 @@ def enter_Pris(node):
 def enter_Vyr(node):
     from Tree_.Tree import Tree
     import Tree_.TreeBuilding as b
+
     x = globals.TOKENS[0][0]
     if x == '-':
         node.add_children([b.build_minus_expr_tree()])
         return
 
-    pVyr = Tree(False, "PVyr")
-    node.add_children([pVyr])
+    node.add_children([Tree(False, "PVyr")])
 
 
 def enter_PVyr(node):
     import Tree_.TreeBuilding as b
     from Tree_.Tree import Tree
+
     x = globals.TOKENS[0][0]
     if x == '(':
         node.add_children([b.build_complex_expr_tree()])
@@ -101,13 +105,14 @@ def enter_PVyr(node):
 
 def enter_PVyr1(node):
     from Tree_.Tree import Tree
+
     x = globals.TOKENS[0][0]
+
     if x in grLexer.BIN_OP:
         binOp = Tree(False, "BinOp")
         pVyr = Tree(False, "PVyr")
         pVyr1 = Tree(False, "PVyr1")
         node.add_children([binOp, pVyr, pVyr1])
-
     return
 
 
@@ -124,7 +129,7 @@ def enter_Term(node):
     if t in grLexer.SPECIAL_OP:
         grLexer.SPECIAL_OP_OUT.add(t)
 
-    if t == ';' and node.parent.value in ["Init", "In", "Out", "Cond"]:
+    if t == ';' and node.parent.parent.value in ["LPris", "Pris"]:
         if node.parent.value == "Init":
             globals.VARS_INIT.add(globals.INIT)
 

@@ -12,10 +12,8 @@ with open("Program1.txt") as file:
     lines_with_space = [" ".join(line.split()) for line in lines]
     g.TOKENS = [[x, ind + 1] for ind, el in enumerate(lines_with_space) for x in el.split(' ')]
 
-print(g.TOKENS)
-
 Main = build_main_tree()
-Main.check_root_left_right()
+Main.parse()
 
 print("Идентификаторы:\t", list(g.VARS.keys()))
 print("Зарезервированные слова:\t", list(grLexer.KEY_WORDS_OUT))
@@ -23,4 +21,4 @@ print("Специальные операторы:\t", list(grLexer.SPECIAL_OP_OU
 print("Бинарные операторы:\t", list(grLexer.BIN_OP_OUT))
 print("Унарные операторы:\t", list(grLexer.UN_OP_OUT))
 
-Main.execute_root_left_right()
+Main.execute()

@@ -22,11 +22,11 @@ def lPer_exe(node):
 def init_exe(vyr):
     id = vyr.parent.children[0].val
     l = []
-    create_vyr(vyr, l)
+    create_expr(vyr, l)
     g.VARS[id] = eval(''.join(l))
 
 
-def create_vyr(node, l):
+def create_expr(node, l):
     if node is None:
         return
 
@@ -38,4 +38,4 @@ def create_vyr(node, l):
         l += [node.val]
 
     for child in node.children:
-        create_vyr(child, l)
+        create_expr(child, l)
