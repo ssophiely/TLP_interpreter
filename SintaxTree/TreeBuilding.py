@@ -1,4 +1,4 @@
-from Tree_.Tree import Tree
+from SintaxTree.Tree import *
 
 colon = Tree(True, ':')
 l_bracket = Tree(True, '(')

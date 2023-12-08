@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+package "Exceptions" {
+  [Exceptions.py]
+}
+
+[grLexer.py]
+[globals.py]
+
+package "Implemention" {
+  [Funcs.py]
+  [globals.py]-->[Funcs.py]
+}
+
+package "Verification" {
+  [EnteringFunc.py]
+  [TermFuncs.py] --> [EnteringFunc.py]
+  [Exceptions.py] --> [TermFuncs.py]
+  [grLexer.py] --> [TermFuncs.py]
+  [globals.py]-->[EnteringFunc.py]
+}
+
+package "SintaxTree" {
+  [Funcs.py] --> [Tree.py]
+  [EnteringFunc.py] --> [Tree.py]
+  [TreeBuilding.py]
+  [Tree.py] --> [TreeBuilding.py]
+}
+
+
+[TreeBuilding.py] --> [main.py]
+[Program.txt]--> [main.py]
+@enduml

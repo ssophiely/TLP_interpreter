@@ -1,5 +1,5 @@
 import grLexer
-from Exceptions.Exceptions import NotAvailableError, VarError, Error, LengthError
+from Exceptions.Exceptions import *
 
 
 def id_check(id, str):

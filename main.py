@@ -1,8 +1,6 @@
 import re
 
-import grLexer
-from Implemention.Funcs import *
-from Tree_.TreeBuilding import *
+from SintaxTree.TreeBuilding import *
 
 pat = re.compile(r"([:;+=/\-,()])")
 

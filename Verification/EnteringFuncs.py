@@ -1,5 +1,4 @@
 import globals
-from Exceptions.Exceptions import *
 from Verification.TermFuncs import *
 
 
@@ -45,7 +44,7 @@ def enter_LPer(node):
 
 
 def enter_Pris(node):
-    import Tree_.TreeBuilding as b
+    import SintaxTree.TreeBuilding as b
 
     x = globals.TOKENS[0][0]
 
@@ -69,8 +68,8 @@ def enter_Pris(node):
 
 
 def enter_Vyr(node):
-    from Tree_.Tree import Tree
-    import Tree_.TreeBuilding as b
+    from SintaxTree.Tree import Tree
+    import SintaxTree.TreeBuilding as b
 
     x = globals.TOKENS[0][0]
     if x == '-':
@@ -81,8 +80,8 @@ def enter_Vyr(node):
 
 
 def enter_PVyr(node):
-    import Tree_.TreeBuilding as b
-    from Tree_.Tree import Tree
+    import SintaxTree.TreeBuilding as b
+    from SintaxTree.Tree import Tree
 
     x = globals.TOKENS[0][0]
     if x == '(':
@@ -104,7 +103,7 @@ def enter_PVyr(node):
 
 
 def enter_PVyr1(node):
-    from Tree_.Tree import Tree
+    from SintaxTree.Tree import Tree
 
     x = globals.TOKENS[0][0]
 
@@ -117,7 +116,7 @@ def enter_PVyr1(node):
 
 
 def enter_Term(node):
-    import Tree_.TreeBuilding as b
+    import SintaxTree.TreeBuilding as b
     t = globals.TOKENS[0][0]
 
     if t != node.value:
