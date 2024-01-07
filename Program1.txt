@@ -1,9 +1,9 @@
-var x,y,z : integer;
+var x,y, z : integer;
 begin
     read(x,y,z);
     write(x,y,z);
     case x of
-        3: y=-56+20;
+        3: y=-56/20;
         5: read(z);
         6: case z of
             1: write(x);
